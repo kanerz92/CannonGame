@@ -11,16 +11,11 @@ public class JudgeClass implements IJudgeClass {
 
     //Change back to boolean return
     @Override
-    public int compareShotAndTarget(int[] target, int[] shot) {
+    public boolean compareShotAndTarget(int[] target, int[] shot) {
         boolean isShot = (Arrays.equals(target, shot));
-        System.out.println(isShot);
-        int n = 0;
-        if(isShot){
-            n = counter.returnCounter();
-        }else{
-            counter.incrementCounter();
-            //More logic
+        if (isShot) {
+            return true;
         }
-        return n ;
+        return false;
     }
 }

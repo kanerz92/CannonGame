@@ -1,7 +1,7 @@
 package com.saggezza.CannonGame;
 
 public class Counter implements ICounter {
-    int result = 1;
+    int result = 0;
 
     @Override
     public void incrementCounter() {

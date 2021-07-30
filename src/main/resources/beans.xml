@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="flowClass" class="com.saggezza.CannonGame.IGameFlow">
+        <constructor-arg ref="iTarget"/>
+        <constructor-arg ref="iValidateInput"/>
+        <constructor-arg ref="ishot"/>
+        <constructor-arg ref="iroundedShot"/>
+        <constructor-arg ref="ijudge"/>
+        <constructor-arg ref="icounter"/>
+    </bean>
+
+
+    <bean id="iTarget" class="com.saggezza.CannonGame.ITarget">
+    </bean>
+
+    <bean id="iValidateInput" class="com.saggezza.CannonGame.IValidateInput">
+    </bean>
+
+    <bean id="ishot" class="com.saggezza.CannonGame.IShot">
+    </bean>
+    <bean id="iroundedShot" class="com.saggezza.CannonGame.IRoundingShotResult">
+    </bean>
+    <bean id="ijudge" class="com.saggezza.CannonGame.IJudgeClass">
+    </bean>
+    <bean id="icounter" class="com.saggezza.CannonGame.ICounter">
+    </bean>
+
+</beans>
