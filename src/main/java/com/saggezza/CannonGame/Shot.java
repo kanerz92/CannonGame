@@ -2,8 +2,6 @@ package com.saggezza.CannonGame;
 
 public class Shot implements IShot{
 
-
-
     @Override
     public double[] computeVelocityAngle(int velocity, int angle) {
 

@@ -1,5 +1,8 @@
 package com.saggezza.CannonGame;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 
@@ -140,3 +143,17 @@ Flow Class to call methods
      */
 
 }
+
+
+//@ExtendWith(MockitoExtension.class)
+////@RunWith(MockitoJUnitRunner.class)
+//public class CannonFlowClassTests {
+//    @InjectMocks
+//    FlowClass flow;
+//
+//    ITarget mockTarget;
+//    IValidateInput mockValidator;
+//    IShot mockShot;
+//    IRoundingShotResult mockRounding;
+//    IJudgeClass mockJudge;
+//    ICounter mockCounter;

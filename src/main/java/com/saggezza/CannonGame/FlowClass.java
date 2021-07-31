@@ -25,7 +25,7 @@ public class FlowClass implements IGameFlow {
     @Override
     public String flow(int velocity, int angle) {
         String resultResponse = "";
-        int[] randomArr = new int[2];
+        int[] randomArr;
             randomArr = mockTarget.getRandomXY();
             int [] r = new int[2];
             r[0]=5;
@@ -48,7 +48,6 @@ public class FlowClass implements IGameFlow {
 
                 } else {
                     resultResponse = "Please enter another shot";
-
                 }
             }else {
                 System.out.println("Sorry! you entered invalid input. Please velocity between (1 & 20) & Angel between (1 & 90 )");
