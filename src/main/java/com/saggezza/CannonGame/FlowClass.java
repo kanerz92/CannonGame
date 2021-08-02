@@ -27,22 +27,18 @@ public class FlowClass implements IGameFlow {
         String resultResponse = "";
         int[] randomArr;
             randomArr = mockTarget.getRandomXY();
-            int [] r = new int[2];
-            r[0]=5;
-            r[1]=2;
-        System.out.println("This is the target" + Arrays.toString(r));
-        if (r.length == 2) {
 
+        System.out.println("\033[4;2m" +"This is the target " + Arrays.toString(randomArr));
+        if (randomArr.length == 2) {
             boolean validateShot = mockValidator.checkInput(velocity, angle);
             if (validateShot) {
-
-                double[] calculatedResults = new double[2];
-                int[] roundResults = new int[2];
+                double[] calculatedResults;
+                int[] roundResults;
                 calculatedResults = mockShot.computeVelocityAngle(velocity, angle);
                 roundResults = mockRounding.roundDoubleValues(calculatedResults);
-                boolean judgeResult = mockJudge.compareShotAndTarget(r, roundResults);
+                boolean judgeResult = mockJudge.compareShotAndTarget(randomArr, roundResults);
                 mockCounter.incrementCounter();
-                System.out.println("The target was" + Arrays.toString(r) +" " + ("Your shot landed at co-ordinates" + Arrays.toString(roundResults)));
+                System.out.println(("Your shot landed at coordinates " + Arrays.toString(roundResults)) +" " + "The target was located at "+ Arrays.toString(randomArr));
                 if (judgeResult) {
                     resultResponse = Integer.toString(mockCounter.returnCounter());
 

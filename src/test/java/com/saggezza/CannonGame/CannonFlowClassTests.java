@@ -1,21 +1,7 @@
 package com.saggezza.CannonGame;
 
-import com.saggezza.CannonGame.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.apache.coyote.http11.Constants.a;
-import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.arrayWithSize;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.ArgumentMatchers.anyByte;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -269,7 +255,6 @@ public class CannonFlowClassTests {
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
-        double[] res = new double[2];
         int[] resu = new int[2];
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
