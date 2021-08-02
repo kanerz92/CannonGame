@@ -3,55 +3,64 @@ package com.saggezza.CannonGame;
 import java.util.Arrays;
 
 public class FlowClass implements IGameFlow {
-    ITarget mockTarget;
-    IValidateInput mockValidator;
-    IShot mockShot;
-    IRoundingShotResult mockRounding;
-    IJudgeClass mockJudge;
-    ICounter mockCounter;
+    ITarget target;
+    IValidateInput validator;
+    IShot shot;
+    IRoundingShotResult rounding;
+    IJudgeClass judge;
+    ICounter counter;
+    int [] generatedValues = new int[2];
 
+    public FlowClass(ITarget target, IValidateInput validator,
+                     IShot shot, IRoundingShotResult rounding,
+                     IJudgeClass judge, ICounter counter) {
 
-    public FlowClass(ITarget mockTarget, IValidateInput mockValidator,
-                     IShot mockShot, IRoundingShotResult mockRounding,
-                     IJudgeClass mockJudge, ICounter mockCounter) {
+        this.target = target;
+        this.validator = validator;
+        this.shot = shot;
+        this.rounding = rounding;
+        this.judge = judge;
+        this.counter = counter;
 
-        this.mockTarget = mockTarget;
-        this.mockValidator = mockValidator;
-        this.mockShot = mockShot;
-        this.mockRounding = mockRounding;
-        this.mockJudge = mockJudge;
-        this.mockCounter = mockCounter;
+    }
+    @Override
+    public int [] getTargetValues() {
+        this.generatedValues= target.getRandomXY();
+        return generatedValues;
     }
 
     @Override
     public String flow(int velocity, int angle) {
+
         String resultResponse = "";
         int[] randomArr;
-            randomArr = mockTarget.getRandomXY();
-
-        System.out.println("\033[4;2m" +"This is the target " + Arrays.toString(randomArr));
+        randomArr=generatedValues;
         if (randomArr.length == 2) {
-            boolean validateShot = mockValidator.checkInput(velocity, angle);
+
+            boolean validateShot = validator.checkInput(velocity, angle);
             if (validateShot) {
+
                 double[] calculatedResults;
                 int[] roundResults;
-                calculatedResults = mockShot.computeVelocityAngle(velocity, angle);
-                roundResults = mockRounding.roundDoubleValues(calculatedResults);
-                boolean judgeResult = mockJudge.compareShotAndTarget(randomArr, roundResults);
-                mockCounter.incrementCounter();
-                System.out.println(("Your shot landed at coordinates " + Arrays.toString(roundResults)) +" " + "The target was located at "+ Arrays.toString(randomArr));
+                calculatedResults = shot.computeVelocityAngle(velocity, angle);
+                roundResults = rounding.roundDoubleValues(calculatedResults);
+                boolean judgeResult = judge.compareShotAndTarget(randomArr, roundResults);
+                counter.incrementCounter();
+                System.out.println("The target was" + Arrays.toString(randomArr) +" " + ("Your shot landed at co-ordinates" + Arrays.toString(roundResults)));
                 if (judgeResult) {
-                    resultResponse = Integer.toString(mockCounter.returnCounter());
+                    resultResponse = Integer.toString(counter.returnCounter());
 
                 } else {
-                    resultResponse = "Please enter another shot ";
+                    resultResponse = "Please enter another shot";
+                    System.out.println("The new target is located at " + " " +  Arrays.toString(this.getTargetValues()));
                 }
             }else {
-                System.out.println("Sorry! You entered an invalid input. Please enter a velocity between (1 & 20) & Angle between (1 & 90 )");
+                System.out.println("Sorry! you entered invalid input. Please velocity between (1 & 20) & Angel between (1 & 90 )");
             }
         }
         return resultResponse;
     }
+
 }
 
 
