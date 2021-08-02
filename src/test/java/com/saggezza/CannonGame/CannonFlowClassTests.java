@@ -2,10 +2,8 @@ package com.saggezza.CannonGame;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.BDDMockito.given;
@@ -129,8 +127,7 @@ public class CannonFlowClassTests {
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class meth
-        int[] resu = new int[2];
-//        given(mockTarget.getRandomXY()).willReturn(resu);
+
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
 //      THen: computeVelocityAngle method is never called
         flow.flow(velocity, angle);
@@ -142,7 +139,6 @@ public class CannonFlowClassTests {
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class methdouble[] res = new double[2];
-        int[] resu = new int[2];
         double[] res = new double[2];
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
 //      THen: roundDoubleValues method is never called
