@@ -2,7 +2,6 @@ package com.saggezza.CannonGame;
 
 public class RoundingShotResult implements IRoundingShotResult {
 
-
     @Override
     public int[] roundDoubleValues(double[] shot) {
         int[] rounded = new int[2];

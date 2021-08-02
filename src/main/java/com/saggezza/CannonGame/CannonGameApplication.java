@@ -1,13 +1,9 @@
 package com.saggezza.CannonGame;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -19,7 +15,6 @@ public class CannonGameApplication {
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		IGameFlow flowClass = applicationContext.getBean("flowClass", FlowClass.class);
-
 
 		System.out.println("Welcome to Ethan & Mohamed's Game! ");
 		System.out.println("You are required to enter velocity between (1 & 20) & Angle between (1 & 90 )");

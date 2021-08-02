@@ -14,6 +14,7 @@ public class FlowClass implements IGameFlow {
     public FlowClass(ITarget mockTarget, IValidateInput mockValidator,
                      IShot mockShot, IRoundingShotResult mockRounding,
                      IJudgeClass mockJudge, ICounter mockCounter) {
+
         this.mockTarget = mockTarget;
         this.mockValidator = mockValidator;
         this.mockShot = mockShot;

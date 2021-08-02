@@ -32,6 +32,4 @@ public class AppConfig {
     public FlowClass createFlowClass(){
         return  new FlowClass(createTarget(),createValidInpute(),createShot(),createRounding(),createJudgeClass(), createICounter());
     }
-
-
 }

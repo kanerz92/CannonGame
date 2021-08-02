@@ -13,6 +13,5 @@ public class Target implements ITarget{
         target[1] = randY;
 
         return target;
-
     }
 }
