@@ -13,7 +13,6 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-//@RunWith(MockitoJUnitRunner.class)
 public class CannonFlowClassTests {
     @InjectMocks
     FlowClass flow;
@@ -29,25 +28,6 @@ public class CannonFlowClassTests {
     IJudgeClass mockJudge;
     @Mock
     ICounter mockCounter;
-
-    /*
-    HappyPathTests
-    Test - 1 mockValidatorIsCalledOnceGivenVelocityAndAngleIsInput()
-    Test - 2 testShotClassComputeVelocityAndAngleMethodIsCalledOneTimeIfInputIsValid()
-    Test - 3 roundDoubleValuesWillBeCalledOnceIfInputIsValid()
-    Test - 4 testIfInputIsValidThenTheIncrementCounterWillBeCalledOneTime();
-    Test - 5 testIfInputIsValidThenTheJudgeCompareShotAndTargetMethodWillBeCalledOneTime();
-    Test - 6 testIfJudgeResultWasTrueReturnCounterWillBeCalledOnce() --Need hardcoded values to test
-    Test - 7 testIfJudgeResultWasFalseReturnCounterWillBeCalledZeroTimes --Need hardcoded values to test
-
-    NoHappyPath
-    Test - 8 mockValidatorIsCalledOnceGivenVelocityAndAngleIsInputInvalid()
-    Test - 9 computeVelocityAndAngleMethodIsCalledZeroTimesIfInputIsInValid()
-    Test - 10 roundDoubleValuesWillBeCalledZeroTimesIfInputIsInValid()
-    Test - 11 testIfInputIsInValidThenTheJudgeCompareShotAndTargetMethodWillBeCalledZeroTimes();
-
-     */
-
 
 
     @Test
@@ -154,7 +134,7 @@ public class CannonFlowClassTests {
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
 //      THen: computeVelocityAngle method is never called
         flow.flow(velocity, angle);
-        verify(mockShot, times(0)).computeVelocityAngle(velocity, angle);
+        verify(mockShot, never()).computeVelocityAngle(velocity, angle);
     }
     @Test
     public void testRoundDoubleValuesIsNeverCalledIfInputIsInValid() {
@@ -167,7 +147,7 @@ public class CannonFlowClassTests {
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
 //      THen: roundDoubleValues method is never called
         flow.flow(velocity, angle);
-        verify(mockRounding, times(0)).roundDoubleValues(res);
+        verify(mockRounding,never()).roundDoubleValues(res);
     }
     @Test
     public void testJudgeCompareShotAndTargetMethodIsNeverCalledIfInputIsInvalid() {
@@ -181,5 +161,42 @@ public class CannonFlowClassTests {
 //      THen: compareShotAndTarget method is never called
         flow.flow(velocity, angle);
         verify(mockJudge, times(0)).compareShotAndTarget(resu,resu);
+    }
+
+    @Test
+    public void  testIfJudgeResultWasFalseReturnCounterWillNeverBeCalled() {
+//      Given: I enter 5 for velocity and 45 for angle
+        int velocity = 5;
+        int angle = 45;
+//      When: When I call the flow class method
+        double[] res = new double[2];
+        int[] resu = new int[2];
+//        given(mockTarget.getRandomXY()).willReturn(resu);
+        given(mockValidator.checkInput(velocity, angle)).willReturn(true);
+        given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
+        given(mockRounding.roundDoubleValues(res)).willReturn(resu);
+        given(mockJudge.compareShotAndTarget(resu, resu)).willReturn(false);
+
+//      THen: compareShotAndTarget method is called once
+        flow.flow(velocity, angle);
+        verify(mockCounter, never()).returnCounter();
+    }
+    @Test
+    public void  testIfJudgeResultWasTrueReturnCounterWillBeCalledOnce() {
+//      Given: I enter 5 for velocity and 45 for angle
+        int velocity = 5;
+        int angle = 45;
+//      When: When I call the flow class method
+        double[] res = new double[2];
+        int[] resu = new int[2];
+//        given(mockTarget.getRandomXY()).willReturn(resu);
+        given(mockValidator.checkInput(velocity, angle)).willReturn(true);
+        given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
+        given(mockRounding.roundDoubleValues(res)).willReturn(resu);
+        given(mockJudge.compareShotAndTarget(resu, resu)).willReturn(true);
+
+//      THen: compareShotAndTarget method is called once
+        flow.flow(velocity, angle);
+        verify(mockCounter, times(1)).returnCounter();
     }
 }
