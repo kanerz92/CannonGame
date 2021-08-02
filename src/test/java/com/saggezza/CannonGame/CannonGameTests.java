@@ -1,46 +1,27 @@
 package com.saggezza.CannonGame;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 
 public class CannonGameTests {
-
-/*
-Given: I need a target
-When: I create target with an x and y
-Then: it is created with the x and y coordinates
-
-THen Shot call and methods - get coordinates
-
-Judge to compare target values and shot values
-
-Flow Class to call methods
-
- */
 
     @Test
     public void testTargetCreatedWithRandomXYValues() {
 //      Given: I need a target
         ITarget target = new Target();
 //      When: the target is created
-
-//      Then: it is created with random X/Y values
-
         int[] result = target.getRandomXY();
+//      Then: it is created with random X/Y values
         int size = result.length;
         assertEquals(2, size);
         System.out.println(Arrays.toString(result));
     }
-
     @Test
-    public void testShotValuesAreComputedCorrectly() {
+    public void testShotValuesAreComputedCorrectlyAndTransformedIntoCoordinates() {
 //      Given: I need a shot
         IShot shot = new Shot();
 //      When: I input a velocity of 5 and an angle of 75
@@ -52,7 +33,6 @@ Flow Class to call methods
         double[] calculateResults = new double[2];
             calculateResults[0] = 1.2940952255126037;
             calculateResults[1] = 4.8296291314453415;
-
             assertArrayEquals(calculateResults,result);
     }
     @Test
@@ -63,18 +43,17 @@ Flow Class to call methods
 //      When: The shot is created with velocity 5 and angle 75
         double[] result;
         result = shot.computeVelocityAngle(velocity,angle);
-//      Then: it is rounded to a whole numbers of type int
+//      Then: it X and Y values are rounded to a whole number of type int
         IRoundingShotResult rounding = new RoundingShotResult();
         int[] actualRoundedResult;
         actualRoundedResult = rounding.roundDoubleValues(result);
         int[] roundedResult = new int[2];
         roundedResult[0] = 1;
         roundedResult[1] = 5;
-
         assertArrayEquals(roundedResult, actualRoundedResult);
     }
     @Test
-    public void testJudgeClassComparesTargetValuesAndRoundedValues() {
+    public void testJudgeClassComparesTargetArrayAndRoundedShotArray() {
 //      Given: I need to compare a shot vs a target
         int velocity = 5; int angle = 30;
         Shot shot = new Shot();
@@ -89,71 +68,37 @@ Flow Class to call methods
         assertTrue(judgeResult);
     }
     @Test
-    public void testValidInputForTheShot(){
-//        Given: I enter a velocity and angle
-          IValidateInput validate = new ValidateInput();
-//        When: The Velocity is 1 and Angle is 90
+    public void testForAValidInputForTheShot(){
+//      Given: I enter a velocity and angle
+        IValidateInput validate = new ValidateInput();
+//      When: The Velocity is 1 and Angle is 90
         int velocity = 1 ;
         int angle = 90;
-          boolean returnValue = validate.checkInput(velocity, angle);
-//        Then: The shot is valid and returns true
-
+        boolean returnValue = validate.checkInput(velocity, angle);
+//      Then: The shot is valid and returns true
         assertTrue(returnValue);
     }
     @Test
     public void testInValidInputForVelocityTheShotReturnFalse(){
-//        Given: I enter a velocity and angle
+//      Given: I enter a velocity and angle
         IValidateInput validate = new ValidateInput();
-//        When: The Velocity is 1 and Angle is 90
+//      When: The Velocity is 1 and Angle is 90
         int velocity = 0 ;
         int angle = 90;
         boolean returnValue = validate.checkInput(velocity, angle);
-//        Then: The shot is valid and returns true
-
+//      Then: The shot is invalid and returns false
         assertFalse(returnValue);
     }
     @Test
     public void testInValidInputForAngleTheShotReturnFalse(){
-//        Given: I enter a velocity and angle
+//      Given: I enter a velocity and angle
         IValidateInput validate = new ValidateInput();
-//        When: The Velocity is 1 and Angle is 90
+//      When: The Velocity is 1 and Angle is 90
         int velocity = 1 ;
         int angle = 91;
         boolean returnValue = validate.checkInput(velocity, angle);
-//        Then: The shot is valid and returns true
-
+//      Then: The shot is valid and returns true
         assertFalse(returnValue);
     }
-
-
-
-
-
-
-
-    /*
-    Test counter
-    Test Validator - and classes to test valid user input
-    Flow - target? input is passed to Validtor.validate()->Shot.computeXY
-    -> rounded object - > judge.compare ->false add counter//true return counter
-
-    Game Class - to generate the target?
-    Output
-
-     */
-
 }
 
-
-//@ExtendWith(MockitoExtension.class)
-////@RunWith(MockitoJUnitRunner.class)
-//public class CannonFlowClassTests {
-//    @InjectMocks
-//    FlowClass flow;
-//
-//    ITarget mockTarget;
-//    IValidateInput mockValidator;
-//    IShot mockShot;
-//    IRoundingShotResult mockRounding;
-//    IJudgeClass mockJudge;
-//    ICounter mockCounter;

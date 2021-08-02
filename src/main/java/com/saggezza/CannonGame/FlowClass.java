@@ -47,10 +47,10 @@ public class FlowClass implements IGameFlow {
                     resultResponse = Integer.toString(mockCounter.returnCounter());
 
                 } else {
-                    resultResponse = "Please enter another shot";
+                    resultResponse = "Please enter another shot ";
                 }
             }else {
-                System.out.println("Sorry! you entered invalid input. Please velocity between (1 & 20) & Angel between (1 & 90 )");
+                System.out.println("Sorry! You entered an invalid input. Please enter a velocity between (1 & 20) & Angle between (1 & 90 )");
             }
         }
         return resultResponse;

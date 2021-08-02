@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.apache.coyote.http11.Constants.a;
@@ -16,8 +18,21 @@ import static org.mockito.ArgumentMatchers.anyByte;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
+
+
+//@ExtendWith(MockitoExtension.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class CannonFlowClassTests {
 
+//    @Mock
+//    ITarget mockTarget;
+//    IValidateInput mockValidator;
+//    IShot mockShot;
+//    IRoundingShotResult mockRounding;
+//    IJudgeClass mockJudge;
+//    ICounter mockCounter;
+//    @InjectMocks
+//    FlowClass flow;
     /*
     HappyPathTests
     Test - 1 mockValidatorIsCalledOnceGivenVelocityAndAngleIsInput()
@@ -31,11 +46,10 @@ public class CannonFlowClassTests {
     NoHappyPath
     Test - 8 mockValidatorIsCalledOnceGivenVelocityAndAngleIsInputInvalid()
     Test - 9 computeVelocityAndAngleMethodIsCalledZeroTimesIfInputIsInValid()
-   Test - 10 roundDoubleValuesWillBeCalledZeroTimesIfInputIsInValid()
+    Test - 10 roundDoubleValuesWillBeCalledZeroTimesIfInputIsInValid()
     Test - 11 testIfInputIsInValidThenTheJudgeCompareShotAndTargetMethodWillBeCalledZeroTimes();
 
      */
-
 
 //    @Mock
 //    IGameFlow flow;
@@ -52,42 +66,39 @@ public class CannonFlowClassTests {
 //    }
 
     @Test
-    public void mockValidatorIsCalledOnceGivenVelocityAndAngleIsInput() {
-//      Given:
+    public void testValidatorCheckInputMethodIsCalledOnceGivenVelocityAndAngleIsInput() {
+//      Given: I start the game
         int velocity = 5;
         int angle = 45;
-//      When: When I call the flow class method
+//      When: When I enter 5 for velocity and 45 for angle
         ITarget mockTarget = mock(ITarget.class);
         IValidateInput mockValidator = mock(IValidateInput.class);
         IShot mockShot = mock(IShot.class);
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
+
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
-        double[] res = new double[2];
         int[] resu = new int[2];
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(1, 50)).willReturn(true);
-
-
+//      THen: The checkInput method is called one time
         flow.flow(velocity, angle);
         verify(mockValidator, times(1)).checkInput(velocity, angle);
     }
-
     @Test
     public void testShotClassComputeVelocityAndAngleMethodIsCalledOneTimeIfInputIsValid() {
-//      Given:
+//      Given: I enter 5 for velocity and 45 for angle
         int velocity = 5;
         int angle = 45;
-//      When: When I call the flow class method
+//      When: The flow class is called
         ITarget mockTarget = mock(ITarget.class);
         IValidateInput mockValidator = mock(IValidateInput.class);
         IShot mockShot = mock(IShot.class);
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
+
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
         double[] res = new double[2];
 
@@ -95,24 +106,23 @@ public class CannonFlowClassTests {
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
         given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
-
+//      THen: computeAngleVelocity method is called once
         flow.flow(velocity, angle);
         verify(mockShot, times(1)).computeVelocityAngle(velocity, angle);
     }
-
     @Test
-    public void roundDoubleValuesWillBeCalledOnceIfInputIsValid() {
-//      Given:
+    public void testRoundDoubleValuesMethodWillBeCalledOnceIfInputIsValid() {
+//      Given: I enter 5 for velocity and 45 for angle
         int velocity = 5;
         int angle = 45;
-//      When: When I call the flow class method
+//      When: The flow class method
         ITarget mockTarget = mock(ITarget.class);
         IValidateInput mockValidator = mock(IValidateInput.class);
         IShot mockShot = mock(IShot.class);
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
+
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
         double[] res = new double[2];
         int[] resu = new int[2];
@@ -121,14 +131,13 @@ public class CannonFlowClassTests {
         given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
         given(mockRounding.roundDoubleValues(res)).willReturn(resu);
 
-
+//      THen: roundDoubleValues method is called once
         flow.flow(velocity, angle);
         verify(mockRounding, times(1)).roundDoubleValues(res);
     }
-
     @Test
-    public void testIfInputIsValidThenTheIncrementCounterWillBeCalledOneTime() {
-//      Given:
+    public void testTheIncrementCounterWillBeCalledOneTimeWithValidInput() {
+//      Given: I enter 5 for velocity and 45 for angle
         int velocity = 5;
         int angle = 45;
 //      When: When I call the flow class method
@@ -138,7 +147,7 @@ public class CannonFlowClassTests {
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
+
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
         double[] res = new double[2];
         int[] resu = new int[2];
@@ -147,6 +156,7 @@ public class CannonFlowClassTests {
         given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
         given(mockRounding.roundDoubleValues(res)).willReturn(resu);
 
+//      THen: incrementCounter method is called once
 
         flow.flow(velocity, angle);
         verify(mockCounter, times(1)).incrementCounter();
@@ -154,7 +164,7 @@ public class CannonFlowClassTests {
 
     @Test
     public void testIfInputIsValidThenTheJudgeCompareShotAndTargetMethodWillBeCalledOneTime() {
-//      Given:
+//      Given: I enter 5 for velocity and 45 for angle
         int velocity = 5;
         int angle = 45;
 //      When: When I call the flow class method
@@ -164,7 +174,6 @@ public class CannonFlowClassTests {
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
         double[] res = new double[2];
         int[] resu = new int[2];
@@ -174,15 +183,15 @@ public class CannonFlowClassTests {
         given(mockRounding.roundDoubleValues(res)).willReturn(resu);
         given(mockJudge.compareShotAndTarget(resu, resu)).willReturn(true);
 
+//      THen: compareShotAndTarget method is called once
 
         flow.flow(velocity, angle);
         verify(mockJudge, times(1)).compareShotAndTarget(resu, resu);
     }
 
-
     @Test
-    public void mockValidatorIsCalledOnceGivenVelocityAndAngleInputIsInvalid() {
-///Given:
+    public void testValidatorIsCalledOnceGivenVelocityAndAngleInputIsInvalid() {
+//      Given: I enter 0 for velocity and 45 for angle
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class method
@@ -192,21 +201,20 @@ public class CannonFlowClassTests {
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
-        double[] res = new double[2];
         int[] resu = new int[2];
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
 
+//      THen: checkInput method is called once
 
         flow.flow(velocity, angle);
         verify(mockValidator, times(1)).checkInput(velocity, angle);
     }
 
     @Test
-    public void testShotClassComputeVelocityAndAngleMethodIsCalledZeroTimesIfInputIsInValid() {
-//      Given:
+    public void testShotClassComputeVelocityAndAngleMethodIsNeverCalledIfInputIsInValid() {
+//      Given: I enter 0 for velocity and 45 for angle
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class method
@@ -216,20 +224,19 @@ public class CannonFlowClassTests {
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
-        double[] res = new double[2];
 
         int[] resu = new int[2];
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
+//      THen: computeVelocityAngle method is never called
 
         flow.flow(velocity, angle);
         verify(mockShot, times(0)).computeVelocityAngle(velocity, angle);
     }
     @Test
-    public void roundDoubleValuesWillBeCalledZeroTimesIfInputIsInValid() {
-//      Given:
+    public void testRoundDoubleValuesIsNeverCalledIfInputIsInValid() {
+//      Given: I enter 0 for velocity and 45 for angle
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class method
@@ -239,19 +246,19 @@ public class CannonFlowClassTests {
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
         double[] res = new double[2];
         int[] resu = new int[2];
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
+//      THen: roundDoubleValues method is never called
 
         flow.flow(velocity, angle);
         verify(mockRounding, times(0)).roundDoubleValues(res);
     }
     @Test
-    public void testIfInputIsInValidThenTheJudgeCompareShotAndTargetMethodWillBeCalledZeroTimes() {
-//      Given:
+    public void testJudgeCompareShotAndTargetMethodIsNeverCalledIfInputIsInvalid() {
+//      Given: I enter 0 for velocity and 45 for angle
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class method
@@ -261,14 +268,13 @@ public class CannonFlowClassTests {
         IRoundingShotResult mockRounding = mock(IRoundingShotResult.class);
         IJudgeClass mockJudge = mock(IJudgeClass.class);
         ICounter mockCounter = mock(ICounter.class);
-//        THen:
         IGameFlow flow = new FlowClass(mockTarget, mockValidator, mockShot, mockRounding, mockJudge, mockCounter);
         double[] res = new double[2];
         int[] resu = new int[2];
         given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
 
-
+//      THen: compareShotAndTarget method is never called
 
         flow.flow(velocity, angle);
         verify(mockJudge, times(0)).compareShotAndTarget(resu,resu);
