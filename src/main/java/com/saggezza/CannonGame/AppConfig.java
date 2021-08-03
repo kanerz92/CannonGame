@@ -1,7 +1,10 @@
 package com.saggezza.CannonGame;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
 
     @Bean(name = "iTarget")
@@ -28,12 +31,22 @@ public class AppConfig {
     public Counter createICounter(){
         return  new Counter();
     }
-    @Bean(name = "flowClass")
-    public FlowClass createFlowClass(){
-        return  new FlowClass(createTarget(),createValidInpute(),createShot(),createRounding(),createJudgeClass(), createICounter());
+
+    @Bean(name = "iRoundFlow")
+    public RoundFlow createRoundFlow(){
+        return new RoundFlow();
     }
-    @Bean(name = "runflowClass")
-    public RunGameFive runGameFive(){
-        return  new RunGameFive( createFlowClass());
+    @Bean(name = "iShotResult")
+    public ShotResult createShotResult(){
+        return new ShotResult();
     }
+    @Bean(name = "fiveRoundFlow")
+    public FiveRoundFlow createFiveRounds(){
+        return new FiveRoundFlow();
+    }
+    @Bean(name = "iShotFlow")
+    public ShotFlow createShotFlow(){
+        return new ShotFlow(createValidInpute(), createShot(),createRounding(),createJudgeClass(),createICounter());
+    }
+
 }
