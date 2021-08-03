@@ -23,6 +23,11 @@ public class FlowClass implements IGameFlow {
         this.counter = counter;
 
     }
+
+    public int getScore () {
+        return this.counter.returnCounter();
+ }
+
     @Override
     public int [] getTargetValues() {
         this.generatedValues= target.getRandomXY();
@@ -31,12 +36,14 @@ public class FlowClass implements IGameFlow {
 
     @Override
     public String flow(int velocity, int angle) {
-
         String resultResponse = "";
-        int[] randomArr;
-        randomArr=generatedValues;
-        if (randomArr.length == 2) {
+        int[] randomArr=new int[2];
+//       randomArr=generatedValues;
+        randomArr[0]=10;
+        randomArr[1]=7;
 
+
+        if (randomArr.length == 2) {
             boolean validateShot = validator.checkInput(velocity, angle);
             if (validateShot) {
 
@@ -46,13 +53,17 @@ public class FlowClass implements IGameFlow {
                 roundResults = rounding.roundDoubleValues(calculatedResults);
                 boolean judgeResult = judge.compareShotAndTarget(randomArr, roundResults);
                 counter.incrementCounter();
+                System.out.println("Attempts counter "+ counter.returnCounter());
+
                 System.out.println("The target was" + Arrays.toString(randomArr) +" " + ("Your shot landed at co-ordinates" + Arrays.toString(roundResults)));
                 if (judgeResult) {
                     resultResponse = Integer.toString(counter.returnCounter());
+                    System.out.println("A Hit!!!!, counter is "+resultResponse);
+
 
                 } else {
                     resultResponse = "Please enter another shot";
-                    System.out.println("The new target is located at " + " " +  Arrays.toString(this.getTargetValues()));
+//                    System.out.println("The new target is located at " + " " +  Arrays.toString(this.getTargetValues()));
                 }
             }else {
                 System.out.println("Sorry! you entered invalid input. Please velocity between (1 & 20) & Angel between (1 & 90 )");
@@ -60,7 +71,6 @@ public class FlowClass implements IGameFlow {
         }
         return resultResponse;
     }
-
 }
 
 

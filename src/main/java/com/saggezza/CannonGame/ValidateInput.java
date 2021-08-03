@@ -9,3 +9,4 @@ public class ValidateInput implements IValidateInput {
         return velocity >= 1 && velocity <= 20 && angle >= 1 && angle <= 90;
     }
 }
+

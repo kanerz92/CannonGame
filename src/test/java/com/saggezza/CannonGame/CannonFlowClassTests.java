@@ -2,8 +2,15 @@ package com.saggezza.CannonGame;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.BDDMockito.given;
@@ -35,7 +42,9 @@ public class CannonFlowClassTests {
         int angle = 45;
 //      When: When I enter 5 for velocity and 45 for angle
         int[] resu = new int[2];
+
         given(mockTarget.getRandomXY()).willReturn(resu);
+
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
 //      THen: The checkInput method is called one time
         flow.flow(velocity, angle);
@@ -49,7 +58,6 @@ public class CannonFlowClassTests {
 //      When: The flow class is called
         double[] res = new double[2];
         int[] resu = new int[2];
-        given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
         given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
 //      THen: computeAngleVelocity method is called once
@@ -64,7 +72,6 @@ public class CannonFlowClassTests {
 //      When: The flow class method
         double[] res = new double[2];
         int[] resu = new int[2];
-        given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
         given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
         given(mockRounding.roundDoubleValues(res)).willReturn(resu);
@@ -80,7 +87,6 @@ public class CannonFlowClassTests {
 //      When: When I call the flow class method
         double[] res = new double[2];
         int[] resu = new int[2];
-        given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
         given(mockShot.computeVelocityAngle(velocity, angle)).willReturn(res);
         given(mockRounding.roundDoubleValues(res)).willReturn(resu);
@@ -114,7 +120,6 @@ public class CannonFlowClassTests {
         int angle = 45;
 //      When: When I call the flow class method
         int[] resu = new int[2];
-        given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
 //      THen: checkInput method is called once
         flow.flow(velocity, angle);
@@ -127,6 +132,7 @@ public class CannonFlowClassTests {
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class meth
+
 
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
 //      THen: computeVelocityAngle method is never called
@@ -152,7 +158,6 @@ public class CannonFlowClassTests {
         int angle = 45;
 //      When: When I call the flow class method
         int[] resu = new int[2];
-        given(mockTarget.getRandomXY()).willReturn(resu);
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
 //      THen: compareShotAndTarget method is never called
         flow.flow(velocity, angle);

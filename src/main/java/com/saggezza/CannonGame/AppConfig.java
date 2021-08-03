@@ -32,4 +32,8 @@ public class AppConfig {
     public FlowClass createFlowClass(){
         return  new FlowClass(createTarget(),createValidInpute(),createShot(),createRounding(),createJudgeClass(), createICounter());
     }
+    @Bean(name = "runflowClass")
+    public RunGameFive runGameFive(){
+        return  new RunGameFive( createFlowClass());
+    }
 }
