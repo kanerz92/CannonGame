@@ -38,7 +38,8 @@ public class CannonGameTests {
     @Test
     public void testShotValuesAreRoundedCorrectlyIntoIntArray() {
 //      Given: I have a shot
-        int velocity = 5; int angle = 75;
+        int velocity = 5;
+        int angle = 75;
         Shot shot = new Shot();
 //      When: The shot is created with velocity 5 and angle 75
         double[] result;
