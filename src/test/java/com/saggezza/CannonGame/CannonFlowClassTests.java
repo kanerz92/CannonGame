@@ -2,10 +2,15 @@ package com.saggezza.CannonGame;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.BDDMockito.given;
@@ -29,6 +34,7 @@ public class CannonFlowClassTests {
     @Mock
     ICounter mockCounter;
 
+
     @Test
     public void testValidatorCheckInputMethodIsCalledOnceGivenVelocityAndAngleIsInput() {
 //      Given: I start the game
@@ -36,6 +42,9 @@ public class CannonFlowClassTests {
         int angle = 45;
 //      When: When I enter 5 for velocity and 45 for angle
         int[] resu = new int[2];
+
+        given(mockTarget.getRandomXY()).willReturn(resu);
+
         given(mockValidator.checkInput(velocity, angle)).willReturn(true);
 //      THen: The checkInput method is called one time
         flow.flow(velocity, angle);
@@ -123,6 +132,8 @@ public class CannonFlowClassTests {
         int velocity = 0;
         int angle = 45;
 //      When: When I call the flow class meth
+
+
         given(mockValidator.checkInput(velocity, angle)).willReturn(false);
 //      THen: computeVelocityAngle method is never called
         flow.flow(velocity, angle);
