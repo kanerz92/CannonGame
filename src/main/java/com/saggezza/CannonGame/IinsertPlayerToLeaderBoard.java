@@ -1,5 +1,5 @@
 package com.saggezza.CannonGame;
 
-public interface IinsertPlayerHighestScoreToleaderBoard {
+public interface IinsertPlayerToLeaderBoard {
     void  writeTofile(Player player);
 }

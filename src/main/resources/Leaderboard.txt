@@ -1,10 +1,5 @@
-aa,2
-bbbb,2
-ww,2
-ddddddd,2
-rrrrr,2
-qqqqq,2
-dd,3
-gfgfg,3
-2,3
-bb,4
+aa,5
+bbbb,10
+ww,19
+ddddddd,20
+rrrrr,25

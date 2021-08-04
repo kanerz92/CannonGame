@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="flowClass" class="com.saggezza.CannonGame.IGameFlow">
-        <constructor-arg ref="iTarget"/>
+    <bean id="shotFlow" class="com.saggezza.CannonGame.ShotFlow">
+
         <constructor-arg ref="iValidateInput"/>
         <constructor-arg ref="ishot"/>
         <constructor-arg ref="iroundedShot"/>
@@ -13,20 +13,42 @@
         <constructor-arg ref="icounter"/>
     </bean>
 
-
-    <bean id="iTarget" class="com.saggezza.CannonGame.ITarget">
+    <bean id="target" class="com.saggezza.CannonGame.Target">
+    </bean>
+    <bean id="iValidateInput" class="com.saggezza.CannonGame.ValidateInput">
     </bean>
 
-    <bean id="iValidateInput" class="com.saggezza.CannonGame.IValidateInput">
+    <bean id="ishot" class="com.saggezza.CannonGame.Shot">
+    </bean>
+    <bean id="iroundedShot" class="com.saggezza.CannonGame.RoundingShotResult">
+    </bean>
+    <bean id="ijudge" class="com.saggezza.CannonGame.JudgeClass">
+    </bean>
+    <bean id="icounter" class="com.saggezza.CannonGame.Counter">
+    </bean>
+    <bean id="shotResult" class="com.saggezza.CannonGame.ShotResult">
     </bean>
 
-    <bean id="ishot" class="com.saggezza.CannonGame.IShot">
+    <bean id="roundFlow" class="com.saggezza.CannonGame.RoundFlow">
+        <constructor-arg ref="target"/>
+        <constructor-arg ref="shotFlow"/>
+        <constructor-arg ref="icounter"/>
+
     </bean>
-    <bean id="iroundedShot" class="com.saggezza.CannonGame.IRoundingShotResult">
+    <bean id="insertPlayerToLeaderBoard" class="com.saggezza.CannonGame.InsertPlayerToLeaderBoard">
     </bean>
-    <bean id="ijudge" class="com.saggezza.CannonGame.IJudgeClass">
+    <bean id="retrieveTheHighScores" class="com.saggezza.CannonGame.RetrieveHighScores">
     </bean>
-    <bean id="icounter" class="com.saggezza.CannonGame.ICounter">
+    <bean id="displayLeaderboard" class="com.saggezza.CannonGame.DisplayLeaderboard">
+    </bean>
+
+    <bean id="fiveRoundFlow" class="com.saggezza.CannonGame.FiveRoundFlow">
+        <constructor-arg ref="roundFlow"/>
+        <constructor-arg ref="target"/>
+        <constructor-arg ref="icounter"/>
+        <constructor-arg ref="insertPlayerToLeaderBoard"/>
+        <constructor-arg ref="retrieveTheHighScores"/>
+        <constructor-arg ref="displayLeaderboard"/>
     </bean>
 
 </beans>
