@@ -12,7 +12,7 @@ public class AppConfig {
         return  new Target();
     }
     @Bean(name = "iValidateInput")
-    public ValidateInput createValidInpute(){
+    public ValidateInput createValidInput(){
         return  new ValidateInput();
     }
     @Bean(name = "ishot")
@@ -32,21 +32,46 @@ public class AppConfig {
         return  new Counter();
     }
 
-    @Bean(name = "iRoundFlow")
-    public RoundFlow createRoundFlow(){
-        return new RoundFlow();
-    }
-    @Bean(name = "iShotResult")
-    public ShotResult createShotResult(){
-        return new ShotResult();
-    }
-    @Bean(name = "fiveRoundFlow")
-    public FiveRoundFlow createFiveRounds(){
-        return new FiveRoundFlow();
-    }
-    @Bean(name = "iShotFlow")
-    public ShotFlow createShotFlow(){
-        return new ShotFlow(createValidInpute(), createShot(),createRounding(),createJudgeClass(),createICounter());
+    @Bean(name = "iGameWelcome")
+    public GameWelcome createGameWelcome(){
+        return new GameWelcome();
     }
 
+    @Bean(name = "iConsoleInputGetter")
+    public ConsoleInputGetter createConsoleInputGetter(){
+        return new ConsoleInputGetter(System.in, System.out);
+    }
+
+    @Bean(name = "iRoundFlow")
+    public RoundFlow createRoundFlow(){
+        return
+                new RoundFlow(createTarget(), createShotFlow(), createICounter(), createIShotResult());
+    }
+    @Bean(name = "iShotResult")
+    public ShotResult createIShotResult(){
+        return new ShotResult();
+    }
+
+    @Bean(name = "InsertPlayerToLeaderBoard")
+    public InsertPlayerToLeaderBoard createInsertPlayerToLeaderBoard(){
+        return new InsertPlayerToLeaderBoard();
+    }
+    @Bean(name = "RetrieveHighScores")
+    public RetrieveHighScores createRetrieveHighScores(){
+        return new RetrieveHighScores();
+    }
+    @Bean(name = "DisplayLeaderboard")
+    public DisplayLeaderboard createDisplayLeaderboard(){
+        return new DisplayLeaderboard();
+    }
+
+    @Bean(name = "fiveRoundFlow")
+    public FiveRoundFlow createFiveRounds(){
+        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveHighScores(),createDisplayLeaderboard(), createGameWelcome(), createConsoleInputGetter());
+    }
+
+    @Bean(name = "iShotFlow")
+    public ShotFlow createShotFlow(){
+        return new ShotFlow(createValidInput(), createShot(),createRounding(),createJudgeClass(),createICounter());
+    }
 }

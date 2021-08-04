@@ -1,6 +1,6 @@
 package com.saggezza.CannonGame;
 
-public class ShotResult {
+public class ShotResult implements IShotResult{
     private boolean isHit = false;
     private String message;
 

@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class InsertPlayerHighestScoreToleaderBoard implements IinsertPlayerHighestScoreToleaderBoard {
+public class InsertPlayerToLeaderBoard implements IinsertPlayerToLeaderBoard {
     @Override
     public void writeTofile(Player player) {
         String name = player.getName();

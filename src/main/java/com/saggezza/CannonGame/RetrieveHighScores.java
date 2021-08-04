@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class RetrieveHighScores implements IRetrieveTheHighScores{
+
     @Override
     public ArrayList<Player> readFile() {
         //Loop through lines
