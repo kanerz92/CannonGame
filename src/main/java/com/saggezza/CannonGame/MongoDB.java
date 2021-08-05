@@ -3,6 +3,7 @@ import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
 
 import com.google.gson.Gson;
+import com.mongodb.Block;
 import com.mongodb.DBCursor;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
@@ -44,10 +45,11 @@ public class MongoDB implements IMongoDB{
         Gson gson = new Gson();
         ArrayList<Player> allPlayers = new ArrayList<Player>();
         FindIterable<Document> result = collection.find();
-        collection.find().into(allPlayers();
-        System.out.println(allPlayers);
-        result.forEach({});
-        return null;
+        result.forEach((Block<Document>) document -> {
+            Player player = gson.fromJson(document.toJson(), Player.class);
+            allPlayers.add(player);
+        });
+        return allPlayers;
     }
 
     @Override

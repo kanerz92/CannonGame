@@ -1,4 +1,5 @@
 package com.saggezza.CannonGame;
+import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
 
 import com.mongodb.client.model.Filters;
@@ -25,10 +26,11 @@ import com.google.gson.Gson;
 public class CannonGameApplication {
 
     public static void main(String[] args) {
-        Player player = new Player("Ethan");
-        player.setScore(27);
         MongoDB mongoDB = new MongoDB();
-        mongoDB.create(player);
+        ArrayList<Player> allPlayers = mongoDB.retrieve();
+        for (int i =0; i < allPlayers.size(); i++){
+            System.out.println(allPlayers.get(i).toString());
+        }
         //mongoDB.update(filter, updatedDocument);
         //ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         //FiveRoundFlow fiveRoundFlow = applicationContext.getBean("fiveRoundFlow", FiveRoundFlow.class);
