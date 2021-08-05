@@ -11,10 +11,7 @@ public class RetrieveScores implements IRetrieveScores {
 
     @Override
     public ArrayList<Player> readScoresFromDB() {
-        //Loop through lines
-        //Split line on comma
-        //Pass name and score into Player
-        //Pass player into Set
+
         ArrayList<Player> players = mongoDB.retrieve();
         Collections.sort(players);
         return players;
