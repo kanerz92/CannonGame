@@ -4,6 +4,7 @@ public class Player implements Comparable<Player>{
     String name;
     int score;
 
+
     public Player(String name) {
         this.name = name;
     }
