@@ -1,13 +1,8 @@
 package com.saggezza.CannonGame;
 
-import org.springframework.stereotype.Component;
-
-import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class RoundFlow implements IRoundFlow {
-
     ITarget target;
     IShotFlow shotFlow;
     ICounter counter;
@@ -21,7 +16,6 @@ public class RoundFlow implements IRoundFlow {
     }
 
     @Override
-
     public int startRound(ConsoleInputGetter consoleInputGetter) {
         int[] t1 = new int[2];
         t1 = target.getRandomXY();

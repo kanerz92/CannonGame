@@ -6,72 +6,85 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-    @Bean(name = "iTarget")
+    @Bean(name = "Target")
     public Target createTarget(){
         return  new Target();
     }
-    @Bean(name = "iValidateInput")
+
+    @Bean(name = "ValidateInput")
     public ValidateInput createValidInput(){
         return  new ValidateInput();
     }
-    @Bean(name = "ishot")
+
+    @Bean(name = "Shot")
     public Shot createShot(){
         return  new Shot();
     }
-    @Bean(name = "iroundedShot")
+
+    @Bean(name = "RoundedShot")
     public RoundingShotResult createRounding(){
         return  new RoundingShotResult();
     }
-    @Bean(name = "ijudge")
+
+    @Bean(name = "Judge")
     public JudgeClass createJudgeClass(){
         return  new JudgeClass();
     }
-    @Bean(name = "icounter")
+
+    @Bean(name = "Counter")
     public Counter createICounter(){
         return  new Counter();
     }
 
-    @Bean(name = "iGameWelcome")
+    @Bean(name = "GameWelcome")
     public GameWelcome createGameWelcome(){
         return new GameWelcome();
     }
 
-    @Bean(name = "iConsoleInputGetter")
+    @Bean(name = "ConsoleInputGetter")
     public ConsoleInputGetter createConsoleInputGetter(){
         return new ConsoleInputGetter(System.in, System.out);
     }
 
-    @Bean(name = "iRoundFlow")
+    @Bean(name = "RoundFlow")
     public RoundFlow createRoundFlow(){
         return
                 new RoundFlow(createTarget(), createShotFlow(), createICounter(), createIShotResult());
     }
-    @Bean(name = "iShotResult")
+
+    @Bean(name = "ShotResult")
     public ShotResult createIShotResult(){
         return new ShotResult();
     }
 
     @Bean(name = "InsertPlayerToLeaderBoard")
     public InsertPlayerToLeaderBoard createInsertPlayerToLeaderBoard(){
-        return new InsertPlayerToLeaderBoard();
+        return new InsertPlayerToLeaderBoard(createMongoDB());
     }
-    @Bean(name = "RetrieveHighScores")
-    public RetrieveScores createRetrieveHighScores(){
-        return new RetrieveScores();
+
+    @Bean(name = "RetrieveScores")
+    public RetrieveScores createRetrieveScores(){
+        return new RetrieveScores(createMongoDB());
     }
+
     @Bean(name = "DisplayLeaderboard")
-    public DisplayLeaderboard createDisplayLeaderboard(){
-        return new DisplayLeaderboard();
+    public ReturnLeaderboard createReturnLeaderboard(){
+        return new ReturnLeaderboard(createRetrieveScores());
     }
 
-    @Bean(name = "fiveRoundFlow")
+    @Bean(name = "FiveRoundFlow")
     public FiveRoundFlow createFiveRounds(){
-        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveHighScores(),createDisplayLeaderboard(), createGameWelcome(), createConsoleInputGetter());
+        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveScores(),createReturnLeaderboard(), createGameWelcome(), createConsoleInputGetter());
     }
 
-    @Bean(name = "iShotFlow")
+    @Bean(name = "ShotFlow")
     public ShotFlow createShotFlow(){
         return new ShotFlow(createValidInput(), createShot(),createRounding(),createJudgeClass(),createICounter());
+    }
+
+    @Bean(name = "MongoDB")
+    public MongoDB createMongoDB() {
+        return new MongoDB();
     }
 }
 

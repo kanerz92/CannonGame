@@ -7,20 +7,20 @@ public class FiveRoundFlow implements IFiveRoundFlow{
     ITarget target;
     ICounter counter;
     IinsertPlayerToLeaderBoard insertPlayerToleaderBoard;
-    IRetrieveTheScores retrieveTheHighScores;
-    IDisplayLeaderboard displayLeaderboard;
+    IRetrieveScores retrieveTheHighScores;
+    IReturnLeaderboard returnLeaderboard;
     GameWelcome gameWelcome;
     ConsoleInputGetter consoleInputGetter;
 
     public FiveRoundFlow(IRoundFlow roundFlow, ITarget target, ICounter counter, IinsertPlayerToLeaderBoard insertPlayerToleaderBoard,
-        IRetrieveTheScores retrieveTheHighScores, IDisplayLeaderboard displayLeaderboard, GameWelcome gameWelcome, ConsoleInputGetter consoleInputGetter) {
+                         IRetrieveScores retrieveTheHighScores, IReturnLeaderboard returnLeaderboard, GameWelcome gameWelcome, ConsoleInputGetter consoleInputGetter) {
 
         this.roundFlow = roundFlow;
         this.target = target;
         this.counter = counter;
         this.insertPlayerToleaderBoard = insertPlayerToleaderBoard;
         this.retrieveTheHighScores = retrieveTheHighScores;
-        this.displayLeaderboard = displayLeaderboard;
+        this.returnLeaderboard = returnLeaderboard;
         this.gameWelcome = gameWelcome;
         this.consoleInputGetter = consoleInputGetter;
     }
@@ -38,8 +38,7 @@ public class FiveRoundFlow implements IFiveRoundFlow{
         System.out.println("Total attempts taken: " + counter.returnCounter());
         player.setScore(Counter);
         insertPlayerToleaderBoard.writeTofile(player);
-        ArrayList<Player> highScores = retrieveTheHighScores.readScoresFromDB();
-        displayLeaderboard.displayLeaderboard();
+        System.out.println(returnLeaderboard.returnLeaderboard());
 
         return Counter;
     }

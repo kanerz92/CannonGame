@@ -2,7 +2,6 @@ package com.saggezza.CannonGame;
 
 public class Target implements ITarget{
 
-
     @Override
     public int[] getRandomXY() {
 

@@ -2,7 +2,6 @@ package com.saggezza.CannonGame;
 
 public class ValidateInput implements IValidateInput {
 
-
     @Override
     public boolean checkInput(int velocity, int angle) {
 
