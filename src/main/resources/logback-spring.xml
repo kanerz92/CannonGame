@@ -1,1 +1,2 @@
-<logger name="org.mongodb" level="WARN" />
+<!--<logger name="org.mongodb" level="WARN" />-->
+<!--Not using this file, but can be used to configure required log levels-->
