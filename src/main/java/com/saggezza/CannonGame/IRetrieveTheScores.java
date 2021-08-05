@@ -4,6 +4,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
-public interface IRetrieveTheHighScores {
-     ArrayList<Player> readFile();
+public interface IRetrieveTheScores {
+     ArrayList<Player> readScoresFromDB();
 }

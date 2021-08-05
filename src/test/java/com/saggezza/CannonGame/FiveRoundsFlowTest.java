@@ -22,7 +22,7 @@ public class FiveRoundsFlowTest {
     @Mock
     IinsertPlayerToLeaderBoard insertPlayerToleaderBoard;
     @Mock
-    IRetrieveTheHighScores retrieveTheHighScores;
+    IRetrieveTheScores retrieveTheHighScores;
     @Mock
     IDisplayLeaderboard displayLeaderboard;
     @Mock

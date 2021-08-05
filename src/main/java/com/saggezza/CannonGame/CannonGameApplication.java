@@ -26,15 +26,9 @@ import com.google.gson.Gson;
 public class CannonGameApplication {
 
     public static void main(String[] args) {
-        MongoDB mongoDB = new MongoDB();
-        ArrayList<Player> allPlayers = mongoDB.retrieve();
-        for (int i =0; i < allPlayers.size(); i++){
-            System.out.println(allPlayers.get(i).toString());
-        }
-        //mongoDB.update(filter, updatedDocument);
-        //ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        //FiveRoundFlow fiveRoundFlow = applicationContext.getBean("fiveRoundFlow", FiveRoundFlow.class);
-        //fiveRoundFlow.flow();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        FiveRoundFlow fiveRoundFlow = applicationContext.getBean("fiveRoundFlow", FiveRoundFlow.class);
+        fiveRoundFlow.flow();
     }
 }
 

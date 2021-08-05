@@ -1,6 +1,5 @@
 package com.saggezza.CannonGame;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -57,8 +56,8 @@ public class AppConfig {
         return new InsertPlayerToLeaderBoard();
     }
     @Bean(name = "RetrieveHighScores")
-    public RetrieveHighScores createRetrieveHighScores(){
-        return new RetrieveHighScores();
+    public RetrieveScores createRetrieveHighScores(){
+        return new RetrieveScores();
     }
     @Bean(name = "DisplayLeaderboard")
     public DisplayLeaderboard createDisplayLeaderboard(){

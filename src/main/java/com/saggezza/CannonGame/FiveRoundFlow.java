@@ -7,13 +7,13 @@ public class FiveRoundFlow implements IFiveRoundFlow{
     ITarget target;
     ICounter counter;
     IinsertPlayerToLeaderBoard insertPlayerToleaderBoard;
-    IRetrieveTheHighScores retrieveTheHighScores;
+    IRetrieveTheScores retrieveTheHighScores;
     IDisplayLeaderboard displayLeaderboard;
     GameWelcome gameWelcome;
     ConsoleInputGetter consoleInputGetter;
 
     public FiveRoundFlow(IRoundFlow roundFlow, ITarget target, ICounter counter, IinsertPlayerToLeaderBoard insertPlayerToleaderBoard,
-        IRetrieveTheHighScores retrieveTheHighScores, IDisplayLeaderboard displayLeaderboard, GameWelcome gameWelcome, ConsoleInputGetter consoleInputGetter) {
+        IRetrieveTheScores retrieveTheHighScores, IDisplayLeaderboard displayLeaderboard, GameWelcome gameWelcome, ConsoleInputGetter consoleInputGetter) {
 
         this.roundFlow = roundFlow;
         this.target = target;
@@ -30,7 +30,7 @@ public class FiveRoundFlow implements IFiveRoundFlow{
         String name = consoleInputGetter.ask("Please enter your name");
         Player player = new Player(name);
         int Counter = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             System.out.println("Round: " + (i + 1));
             int roundCounter = roundFlow.startRound(consoleInputGetter);
             Counter += roundCounter;
@@ -38,7 +38,7 @@ public class FiveRoundFlow implements IFiveRoundFlow{
         System.out.println("Total attempts taken: " + counter.returnCounter());
         player.setScore(Counter);
         insertPlayerToleaderBoard.writeTofile(player);
-        ArrayList<Player> highScores = retrieveTheHighScores.readFile();
+        ArrayList<Player> highScores = retrieveTheHighScores.readScoresFromDB();
         displayLeaderboard.displayLeaderboard();
 
         return Counter;
