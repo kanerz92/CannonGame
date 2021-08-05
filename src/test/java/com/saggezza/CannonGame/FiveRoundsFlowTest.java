@@ -28,6 +28,8 @@ public class FiveRoundsFlowTest {
     @Mock
     GameWelcome gameWelcome;
     @Mock
+    PrintPlayers printPlayers;
+    @Mock
     ConsoleInputGetter consoleInputGetter;
 
     @Test

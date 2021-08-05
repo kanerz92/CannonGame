@@ -11,13 +11,12 @@ public class ReturnLeaderboard implements IReturnLeaderboard{
     }
 
     @Override
-    public String returnLeaderboard() {
-        String leaderboard = "";
+    public ArrayList<Player> returnLeaderboard() {
+        ArrayList<Player> leaderboard = new ArrayList<Player>();
         ArrayList<Player> players = retrieveScores.readScoresFromDB();
         Collections.sort(players);
-        leaderboard += "\033[4;2m"+ "This is the current leaderboard\n";
-        for(int i = 0; i < Math.min(10, players.size()); i++){
-            leaderboard += players.get(i).toString() + "\n";
+        for (int i = 0; i < Math.min(10, players.size()); i++) {
+            leaderboard.add(players.get(i));
         }
         return leaderboard;
     }

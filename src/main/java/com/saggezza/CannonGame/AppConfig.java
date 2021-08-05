@@ -41,6 +41,11 @@ public class AppConfig {
         return new GameWelcome();
     }
 
+    @Bean(name = "PrintPlayers")
+    public PrintPlayers createPrintPlayers(){
+        return new PrintPlayers();
+    }
+
     @Bean(name = "ConsoleInputGetter")
     public ConsoleInputGetter createConsoleInputGetter(){
         return new ConsoleInputGetter(System.in, System.out);
@@ -74,7 +79,7 @@ public class AppConfig {
 
     @Bean(name = "FiveRoundFlow")
     public FiveRoundFlow createFiveRounds(){
-        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveScores(),createReturnLeaderboard(), createGameWelcome(), createConsoleInputGetter());
+        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveScores(),createReturnLeaderboard(), createGameWelcome(), createPrintPlayers(), createConsoleInputGetter());
     }
 
     @Bean(name = "ShotFlow")

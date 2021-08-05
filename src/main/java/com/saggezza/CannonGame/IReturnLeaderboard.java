@@ -1,5 +1,7 @@
 package com.saggezza.CannonGame;
 
+import java.util.ArrayList;
+
 public interface IReturnLeaderboard {
-    String returnLeaderboard();
+    ArrayList<Player> returnLeaderboard();
 }

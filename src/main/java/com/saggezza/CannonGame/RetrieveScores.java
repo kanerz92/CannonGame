@@ -11,9 +11,7 @@ public class RetrieveScores implements IRetrieveScores {
 
     @Override
     public ArrayList<Player> readScoresFromDB() {
-
         ArrayList<Player> players = mongoDB.retrieve();
-        Collections.sort(players);
         return players;
     }
 }
