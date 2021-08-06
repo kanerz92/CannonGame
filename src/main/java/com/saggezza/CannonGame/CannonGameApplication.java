@@ -17,6 +17,10 @@ public class CannonGameApplication {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         FiveRoundFlow fiveRoundFlow = applicationContext.getBean("FiveRoundFlow", FiveRoundFlow.class);
         fiveRoundFlow.flow();
+//        MongoDB mongoDB = new MongoDB();
+//        User user = new User("David", "password123");
+//        user.setScore(18);
+//        mongoDB.update(user);
     }
 }
 

@@ -35,9 +35,9 @@
         <constructor-arg ref="icounter"/>
 
     </bean>
-    <bean id="insertPlayerToLeaderBoard" class="com.saggezza.CannonGame.InsertPlayerToLeaderBoard">
+    <bean id="insertPlayerToLeaderBoard" class="com.saggezza.CannonGame.InsertUserToLeaderBoard">
     </bean>
-    <bean id="retrieveTheHighScores" class="com.saggezza.CannonGame.RetrieveScores">
+    <bean id="retrieveTheHighScores" class="com.saggezza.CannonGame.RetrieveUsers">
     </bean>
     <bean id="displayLeaderboard" class="com.saggezza.CannonGame.DisplayLeaderboard">
     </bean>
