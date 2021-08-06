@@ -32,18 +32,16 @@ public class FiveRoundFlow implements IFiveRoundFlow{
         System.out.println(gameWelcome.getGameWelcome());
         String name = consoleInputGetter.ask("Please enter your name");
         Player player = new Player(name);
-        int Counter = 0;
         for (int i = 0; i < 1; i++) {
             System.out.println("Round: " + (i + 1));
-            int roundCounter = roundFlow.startRound(consoleInputGetter);
-            Counter += roundCounter;
+            roundFlow.startRound(consoleInputGetter);
         }
         System.out.println("Total attempts taken: " + counter.returnCounter());
-        player.setScore(Counter);
+        player.setScore(counter.returnCounter());
         insertPlayerToleaderBoard.writeTofile(player);
         ArrayList<Player> leaderboard = returnLeaderboard.returnLeaderboard();
         printPlayers.printPlayers(leaderboard);
 
-        return Counter;
+        return counter.returnCounter();
     }
 }
