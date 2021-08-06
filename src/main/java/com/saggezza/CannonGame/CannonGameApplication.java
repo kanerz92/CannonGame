@@ -16,5 +16,3 @@ public class CannonGameApplication {
         fiveRoundFlow.flow();
     }
 }
-
-
