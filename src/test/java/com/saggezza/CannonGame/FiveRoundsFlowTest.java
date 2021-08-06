@@ -20,9 +20,9 @@ public class FiveRoundsFlowTest {
     @Mock
     ICounter counter;
     @Mock
-    IinsertPlayerToLeaderBoard insertPlayerToleaderBoard;
+    IinsertUserToLeaderBoard insertPlayerToleaderBoard;
     @Mock
-    IRetrieveScores retrieveTheHighScores;
+    IRetrieveUsers retrieveTheHighScores;
     @Mock
     IReturnLeaderboard displayLeaderboard;
     @Mock
@@ -49,7 +49,7 @@ public class FiveRoundsFlowTest {
         given(consoleInputGetter.ask("Please enter your name")).willReturn("David");
         fiveRoundFlow.flow();
         //Then: 5 Rounds are played
-        verify(insertPlayerToleaderBoard, times(1)).writeTofile(any(Player.class));
+        verify(insertPlayerToleaderBoard, times(1)).writeToLeaderBoard(any(User.class));
     }
 
     @Test

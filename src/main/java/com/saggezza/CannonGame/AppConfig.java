@@ -62,14 +62,14 @@ public class AppConfig {
         return new ShotResult();
     }
 
-    @Bean(name = "InsertPlayerToLeaderBoard")
-    public InsertPlayerToLeaderBoard createInsertPlayerToLeaderBoard(){
-        return new InsertPlayerToLeaderBoard(createMongoDB());
+    @Bean(name = "InsertUserToLeaderBoard")
+    public InsertUserToLeaderBoard createInsertPlayerToLeaderBoard(){
+        return new InsertUserToLeaderBoard(createMongoDB());
     }
 
-    @Bean(name = "RetrieveScores")
-    public RetrieveScores createRetrieveScores(){
-        return new RetrieveScores(createMongoDB());
+    @Bean(name = "RetrieveUsers")
+    public RetrieveUsers createRetrieveScores(){
+        return new RetrieveUsers(createMongoDB());
     }
 
     @Bean(name = "DisplayLeaderboard")
@@ -79,12 +79,17 @@ public class AppConfig {
 
     @Bean(name = "FiveRoundFlow")
     public FiveRoundFlow createFiveRounds(){
-        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveScores(),createReturnLeaderboard(), createGameWelcome(), createPrintPlayers(), createConsoleInputGetter());
+        return new FiveRoundFlow(createRoundFlow(), createTarget(),createICounter(),createInsertPlayerToLeaderBoard(),createRetrieveScores(),createReturnLeaderboard(), createGameWelcome(), createPrintPlayers(), createConsoleInputGetter(), createLogin());
     }
 
     @Bean(name = "ShotFlow")
     public ShotFlow createShotFlow(){
         return new ShotFlow(createValidInput(), createShot(),createRounding(),createJudgeClass(),createICounter());
+    }
+
+    @Bean(name = "Login")
+    public Login createLogin(){
+        return new Login(createConsoleInputGetter(), createRetrieveScores());
     }
 
     @Bean(name = "MongoDB")

@@ -3,22 +3,12 @@ import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
-import com.mongodb.DBCursor;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
-import org.bson.conversions.Bson;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import javax.print.Doc;
-import java.io.IOException;
 import java.util.*;
-import java.util.logging.FileHandler;
 
 
 public class MongoDB implements IMongoDB{
@@ -29,28 +19,60 @@ public class MongoDB implements IMongoDB{
     public MongoDB() {
         this.mongoClient = MongoClients.create();
         this.mongoDatabase = mongoClient.getDatabase("CannonGame");
-        this.collection = mongoDatabase.getCollection("People");
+        this.collection = mongoDatabase.getCollection("Users");
     }
 
 
     @Override
-    public void create(Player player) {
-        String playerJson = new Gson().toJson(player);
-        Document document = Document.parse(playerJson);
+    public void create(User user) {
+        String userJson = new Gson().toJson(user);
+        Document document = Document.parse(userJson);
         collection.insertOne(document);
     }
 
     @Override
-    public ArrayList<Player> retrieve() {
+    public ArrayList<User> retrieveAllUsers() {
         Gson gson = new Gson();
-        ArrayList<Player> allPlayers = new ArrayList<Player>();
+        ArrayList<User> allUsers = new ArrayList<User>();
         FindIterable<Document> result = collection.find();
         result.forEach((Block<Document>) document -> {
-            Player player = gson.fromJson(document.toJson(), Player.class);
-            allPlayers.add(player);
+            User user = gson.fromJson(document.toJson(), User.class);
+            allUsers.add(user);
         });
-        return allPlayers;
+        return allUsers;
     }
 
+    @Override
+    public int retrieveScore(User user) {
+        int score;
+        Gson gson = new Gson();
+        String userJson = gson.toJson(user);
+        Document document = new Document("username", user.getUsername());
+        FindIterable<Document> result = collection.find(document);
+        MongoCursor<Document> cursor = result.iterator();
+        try {
+            while (cursor.hasNext()) {
+                score = gson.fromJson(cursor.next().toJson(), User.class).getScore();
+                return score;
+            }
+        }
+        finally {
+            cursor.close();
+        }
+        return 999999;
+    }
 
+    public void update(User user) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("username", user.getUsername());
+        query.put("password", user.getPassword());// (1)
+
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.put("score", user.getScore()); // (2)
+
+        BasicDBObject updateObject = new BasicDBObject();
+        updateObject.put("$set", newDocument); // (3)
+
+        collection.updateOne(query, updateObject);
+    }
 }

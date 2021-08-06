@@ -13,10 +13,10 @@ class ReturnLeaderboardTest {
     void testGivenNoPlayersThenReturnEmptyLeaderboard() {
         //Given: I am a user
         //When: I want to retrieve the leaderboard and there are no players
-        RetrieveScores mockRetrieveScores = mock(RetrieveScores.class);
-        given(mockRetrieveScores.readScoresFromDB()).willReturn(new ArrayList<Player>());
+        RetrieveUsers mockRetrieveScores = mock(RetrieveUsers.class);
+        given(mockRetrieveScores.readUsersFromDB()).willReturn(new ArrayList<User>());
         ReturnLeaderboard returnLeaderboard = new ReturnLeaderboard(mockRetrieveScores);
-        ArrayList<Player> leaderboard = returnLeaderboard.returnLeaderboard();
+        ArrayList<User> leaderboard = returnLeaderboard.returnLeaderboard();
         //Then: I receive an empty list of players
         assertEquals(0,leaderboard.size());
     }
