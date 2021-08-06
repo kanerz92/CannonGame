@@ -9,7 +9,8 @@ public class InsertUserToLeaderBoard implements IinsertUserToLeaderBoard {
 
     @Override
     public void writeToLeaderBoard(User user) {
-        if (user.getScore() < mongoDB.retrieveScore(user));
-        mongoDB.update(user);
+        if (user.getScore() < mongoDB.retrieveScore(user)) {
+            mongoDB.update(user);
+        }
     }
 }
