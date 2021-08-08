@@ -40,7 +40,7 @@ public class AppConfig {
     public GameWelcome createGameWelcome(){
         return new GameWelcome();
     }
-
+    
     @Bean(name = "PrintPlayers")
     public PrintPlayers createPrintPlayers(){
         return new PrintPlayers();
@@ -91,6 +91,11 @@ public class AppConfig {
     public MongoDB createMongoDB() {
         return new MongoDB();
     }
+
+//    @Bean(name = "UserModel")
+//    public UserModel createUserModel() {
+//        return new UserModel();
+//    }
 }
 
 

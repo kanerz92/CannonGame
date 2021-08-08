@@ -2,6 +2,7 @@ package com.saggezza.CannonGame;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Document(collection = "users")
@@ -9,7 +10,9 @@ public class UserModel {
 
     @Id
     private String id;
+    @Field(name = "username")
     private String username;
+    @Field(name = "password")
     private String password;
 
     public UserModel() {
